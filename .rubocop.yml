@@ -1,0 +1,23 @@
+# Not use class document
+Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 128
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
+
+AllCops:
+  Exclude:
+    - db/schema.rb
+    - bin/**
+    - vendor/**/*
+    - config/**/*
+    - db/migrate/*
+    - node_modules/**/*
+    - Gemfile
+    - Rakefile
+    - Guardfile
+

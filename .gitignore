@@ -57,3 +57,6 @@ yarn-debug.log*
 
 # Ignore RubyMine
 /.idea
+
+# Ignore Design mock
+design_mock

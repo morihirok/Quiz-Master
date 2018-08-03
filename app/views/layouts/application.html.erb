@@ -27,13 +27,15 @@
       </div>
     </nav>
 
-    <% flash.each do |name, msg| %>
-      <div class="alert alert-<%= name %>">
-        <%= msg.html_safe %>
-      </div>
-    <% end %>
+    <div class="container">
+      <% flash.each do |name, msg| %>
+        <div class="alert alert-<%= name %> mt-2">
+          <%= msg.html_safe %>
+        </div>
+      <% end %>
 
-    <%= yield %>
+      <%= yield %>
+    </div>
 
   </body>
 </html>

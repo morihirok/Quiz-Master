@@ -18,4 +18,12 @@ RSpec.describe Question, type: :model do
     question.valid?
     expect(question.errors[:answer]).to include("can't be blank")
   end
+
+  describe '.random' do
+    it 'returns random question' do
+      contents1 = Array.new(10) { Question.random.content }
+      contents2 = Array.new(10) { Question.random.content }
+      expect(contents1).not_to match(contents2)
+    end
+  end
 end

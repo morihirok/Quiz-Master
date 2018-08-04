@@ -8,9 +8,13 @@ class QuizMode::QuestionsController < ApplicationController
   def show
     respond_to do |format|
       format.html
-      format.json do
-        @question = Question.find(params[:id])
-      end
+      format.json { set_question }
     end
+  end
+
+  private
+
+  def set_question
+    @question = params[:id] == 'random' ? Question.random : Question.find(params[:id])
   end
 end

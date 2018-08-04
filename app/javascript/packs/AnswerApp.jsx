@@ -6,14 +6,21 @@ import React from "react";
 import ReactDOM from "react-dom";
 import PropTypes from "prop-types";
 
-const Hello = ({ name }) => <div>{name}</div>;
+const AnswerApp = () => (
+  <div className="p-5">
+    <h4 className="mb-4">Question :</h4>
+    <h2 className="mb-4">How Many vowels are there in the English alphabet?</h2>
+    <form>
+      <div className="form-group">
+        <label htmlFor="answerInput">Answer</label>
+        <input id="answerInput" type="text" className="form-control w-75" />
+        <button className="btn btn-primary mt-3" type="button">
+          Apply!
+        </button>
+        <p className="mt-4">Show Answer</p>
+      </div>
+    </form>
+  </div>
+);
 
-Hello.defaultProps = {
-  name: "David"
-};
-
-Hello.propTypes = {
-  name: PropTypes.string
-};
-
-ReactDOM.render(<Hello name="React" />, document.getElementById("AnswerApp"));
+ReactDOM.render(<AnswerApp />, document.getElementById("AnswerApp"));

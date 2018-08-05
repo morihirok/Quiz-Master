@@ -26,4 +26,62 @@ RSpec.describe Question, type: :model do
       expect(contents1).not_to match(contents2)
     end
   end
+
+  describe '#correct?' do
+    context 'when set the answer to 5 and answer is 5' do
+      it 'returns true' do
+        question = FactoryBot.build(:question)
+        answer = '5'
+        expect(question.correct?(answer)).to be(true)
+      end
+    end
+
+    context 'when set the answer to 4 and answer is 5' do
+      it 'returns false' do
+        question = FactoryBot.build(:question)
+        answer = '4'
+        expect(question.correct?(answer)).to be(false)
+      end
+    end
+
+    context 'when set the answer to five and answer is 5' do
+      it 'returns true' do
+        question = FactoryBot.build(:question)
+        answer = 'five'
+        expect(question.correct?(answer)).to be(true)
+      end
+    end
+
+    context 'when set the answer to 0 and answer is 0' do
+      it 'returns true' do
+        question = FactoryBot.build(:question, answer: '0')
+        answer = '0'
+        expect(question.correct?(answer)).to be(true)
+      end
+    end
+
+    context 'when set the answer to zero and answer is 0' do
+      it 'returns true' do
+        question = FactoryBot.build(:question, answer: '0')
+        answer = 'zero'
+        expect(question.correct?(answer)).to be(true)
+      end
+    end
+
+    context 'when set the answer to hoge and answer is 0' do
+      it 'returns false' do
+        question = FactoryBot.build(:question, answer: '0')
+        answer = 'hoge'
+        expect(question.correct?(answer)).to be(false)
+      end
+    end
+
+    context 'when set the answer to nil and answer is 5' do
+      it 'returns false' do
+        question = FactoryBot.build(:question)
+        answer = nil
+        expect(question.correct?(answer)).to be(false)
+      end
+    end
+  end
 end

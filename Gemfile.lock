@@ -126,6 +126,8 @@ GEM
     notiffany (0.1.1)
       nenv (~> 0.1)
       shellany (~> 0.0)
+    numbers_in_words (0.4.0)
+      activesupport
     parallel (1.12.1)
     parser (2.5.1.2)
       ast (~> 2.4.0)
@@ -266,6 +268,7 @@ DEPENDENCIES
   guard-rubocop
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
+  numbers_in_words
   pry-byebug
   puma (~> 3.11)
   rails (~> 5.2.0)

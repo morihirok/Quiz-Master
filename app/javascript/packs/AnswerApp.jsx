@@ -1,9 +1,7 @@
-// Run this example by adding <%= javascript_pack_tag 'hello_react' %> to the head of your layout file,
-// like app/views/layouts/application.html.erb. All it does is render <div>Hello React</div> at the bottom
-// of the page.
-
 import React from "react";
 import ReactDOM from "react-dom";
+
+import QuizResult from "./components/QuizResult";
 
 class AnswerApp extends React.Component {
   constructor() {
@@ -14,9 +12,11 @@ class AnswerApp extends React.Component {
         id: null,
         content: null
       },
-      answer: ""
+      answer: "",
+      result: null
     };
     this.handleOnChangeAnswer = this.handleOnChangeAnswer.bind(this);
+    this.handleOnClickSubmit = this.handleOnClickSubmit.bind(this);
   }
 
   async componentDidMount() {
@@ -34,8 +34,19 @@ class AnswerApp extends React.Component {
     this.setState({ answer: target.value });
   }
 
+  async handleOnClickSubmit() {
+    const { answer, question } = this.state;
+    const resp = await window.fetch(
+      `${window.location.origin}/quiz_mode/questions/${
+        question.id
+      }?answer=${answer}`
+    );
+    const { result } = await resp.json();
+    this.setState({ result });
+  }
+
   render() {
-    const { question, answer } = this.state;
+    const { question, answer, result } = this.state;
 
     return (
       <div className="p-5">
@@ -51,9 +62,15 @@ class AnswerApp extends React.Component {
               type="text"
               className="form-control w-75"
             />
-            <button className="btn btn-primary mt-3" type="button">
-              Apply!
+            <QuizResult result={result} />
+            <button
+              onClick={this.handleOnClickSubmit}
+              className="btn btn-primary mt-3"
+              type="button"
+            >
+              Submit!
             </button>
+
             <p className="mt-4">Show Answer</p>
           </div>
         </form>

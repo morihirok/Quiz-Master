@@ -29,8 +29,4 @@ class Question < ApplicationRecord
     return nil if number.zero?
     number.to_s
   end
-
-  def integer?(input)
-    input =~ /^[0-9]+$/
-  end
 end

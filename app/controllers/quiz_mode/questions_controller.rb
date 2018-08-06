@@ -6,6 +6,8 @@ class QuizMode::QuestionsController < ApplicationController
   end
 
   def show
+    return render json: { result: quiz_result } if params[:answer].present?
+
     respond_to do |format|
       format.html
       format.json { set_question }
@@ -16,5 +18,9 @@ class QuizMode::QuestionsController < ApplicationController
 
   def set_question
     @question = params[:id] == 'random' ? Question.random : Question.find(params[:id])
+  end
+
+  def quiz_result
+    Question.find(params[:id]).correct?(params[:answer])
   end
 end

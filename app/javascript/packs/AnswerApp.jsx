@@ -17,7 +17,8 @@ class AnswerApp extends React.Component {
       result: null,
       buttonDisable: false,
       answerShowed: false,
-      correctAnswer: null
+      correctAnswer: null,
+      quizDone: false
     };
     this.handleOnChangeAnswer = this.handleOnChangeAnswer.bind(this);
     this.handleOnClickSubmit = this.handleOnClickSubmit.bind(this);
@@ -52,6 +53,8 @@ class AnswerApp extends React.Component {
 
     if (!result) {
       this.setState({ buttonDisable: false });
+    } else {
+      this.setState({ quizDone: true });
     }
 
     this.setState({ result });
@@ -76,7 +79,8 @@ class AnswerApp extends React.Component {
       result,
       buttonDisable,
       answerShowed,
-      correctAnswer
+      correctAnswer,
+      quizDone
     } = this.state;
 
     return (
@@ -106,6 +110,7 @@ class AnswerApp extends React.Component {
               answerShowed={answerShowed}
               correctAnswer={correctAnswer}
               handleOnClickShowAnswer={this.handleOnClickShowAnswer}
+              quizDone={quizDone}
             />
           </div>
         </form>

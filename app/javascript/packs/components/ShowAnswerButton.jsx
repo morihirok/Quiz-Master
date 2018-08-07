@@ -1,7 +1,12 @@
 import React from "react";
 
 const ShowAnswerButton = props => {
-  const { answerShowed, correctAnswer, handleOnClickShowAnswer } = props;
+  const {
+    answerShowed,
+    quizDone,
+    correctAnswer,
+    handleOnClickShowAnswer
+  } = props;
 
   if (answerShowed) {
     return (
@@ -16,6 +21,11 @@ const ShowAnswerButton = props => {
       </div>
     );
   }
+
+  if (quizDone) {
+    return <div />;
+  }
+
   return (
     <div className="mt-4">
       <button

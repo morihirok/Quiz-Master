@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import QuizResult from "./components/QuizResult";
+import ShowAnswerButton from "./components/ShowAnswerButton";
 
 class AnswerApp extends React.Component {
   constructor() {
@@ -14,10 +15,13 @@ class AnswerApp extends React.Component {
       },
       answer: "",
       result: null,
-      buttonDisable: false
+      buttonDisable: false,
+      answerShowed: false,
+      correctAnswer: null
     };
     this.handleOnChangeAnswer = this.handleOnChangeAnswer.bind(this);
     this.handleOnClickSubmit = this.handleOnClickSubmit.bind(this);
+    this.handleOnClickShowAnswer = this.handleOnClickShowAnswer.bind(this);
   }
 
   async componentDidMount() {
@@ -53,8 +57,27 @@ class AnswerApp extends React.Component {
     this.setState({ result });
   }
 
+  async handleOnClickShowAnswer() {
+    this.setState({ answerShowed: true });
+    this.setState({ buttonDisable: true });
+
+    const { question } = this.state;
+    const resp = await window.fetch(
+      `${window.location.origin}/quiz_mode/questions/${question.id}/answer`
+    );
+    const { answer } = await resp.json();
+    this.setState({ correctAnswer: answer });
+  }
+
   render() {
-    const { question, answer, result, buttonDisable } = this.state;
+    const {
+      question,
+      answer,
+      result,
+      buttonDisable,
+      answerShowed,
+      correctAnswer
+    } = this.state;
 
     return (
       <div className="p-5">
@@ -79,8 +102,11 @@ class AnswerApp extends React.Component {
             >
               Submit!
             </button>
-
-            <p className="mt-4">Show Answer</p>
+            <ShowAnswerButton
+              answerShowed={answerShowed}
+              correctAnswer={correctAnswer}
+              handleOnClickShowAnswer={this.handleOnClickShowAnswer}
+            />
           </div>
         </form>
       </div>

@@ -13,7 +13,8 @@ class AnswerApp extends React.Component {
         content: null
       },
       answer: "",
-      result: null
+      result: null,
+      buttonDisable: false
     };
     this.handleOnChangeAnswer = this.handleOnChangeAnswer.bind(this);
     this.handleOnClickSubmit = this.handleOnClickSubmit.bind(this);
@@ -35,6 +36,8 @@ class AnswerApp extends React.Component {
   }
 
   async handleOnClickSubmit() {
+    this.setState({ buttonDisable: true });
+
     const { answer, question } = this.state;
     const resp = await window.fetch(
       `${window.location.origin}/quiz_mode/questions/${
@@ -42,11 +45,16 @@ class AnswerApp extends React.Component {
       }?answer=${answer}`
     );
     const { result } = await resp.json();
+
+    if (!result) {
+      this.setState({ buttonDisable: false });
+    }
+
     this.setState({ result });
   }
 
   render() {
-    const { question, answer, result } = this.state;
+    const { question, answer, result, buttonDisable } = this.state;
 
     return (
       <div className="p-5">
@@ -67,6 +75,7 @@ class AnswerApp extends React.Component {
               onClick={this.handleOnClickSubmit}
               className="btn btn-primary mt-3"
               type="button"
+              disabled={buttonDisable}
             >
               Submit!
             </button>

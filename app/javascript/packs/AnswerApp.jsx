@@ -15,7 +15,7 @@ class AnswerApp extends React.Component {
       },
       answer: "",
       result: null,
-      buttonDisable: false,
+      buttonDisable: true,
       answerShowed: false,
       correctAnswer: null,
       quizDone: false
@@ -37,6 +37,11 @@ class AnswerApp extends React.Component {
   }
 
   handleOnChangeAnswer({ target }) {
+    if (target.value.length > 0) {
+      this.setState({ buttonDisable: false });
+    } else {
+      this.setState({ buttonDisable: true });
+    }
     this.setState({ answer: target.value });
   }
 
@@ -97,7 +102,6 @@ class AnswerApp extends React.Component {
               type="text"
               className="form-control w-75"
             />
-            <QuizResult result={result} />
             <button
               onClick={this.handleOnClickSubmit}
               className="btn btn-primary mt-3"
@@ -106,6 +110,7 @@ class AnswerApp extends React.Component {
             >
               Submit!
             </button>
+            <QuizResult result={result} />
             <ShowAnswerButton
               answerShowed={answerShowed}
               correctAnswer={correctAnswer}

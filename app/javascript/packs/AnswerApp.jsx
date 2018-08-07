@@ -41,7 +41,8 @@ class AnswerApp extends React.Component {
   }
 
   handleOnChangeAnswer({ target }) {
-    if (target.value.length > 0) {
+    const { quizDone } = this.state;
+    if (target.value.length > 0 && !quizDone) {
       this.setState({ buttonDisable: false });
     } else {
       this.setState({ buttonDisable: true });
@@ -105,6 +106,7 @@ class AnswerApp extends React.Component {
               id="answerInput"
               type="text"
               className="form-control w-75"
+              disabled={answerShowed}
             />
             <button
               onClick={this.handleOnClickSubmit}

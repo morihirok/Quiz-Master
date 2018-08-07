@@ -27,13 +27,15 @@ class AnswerApp extends React.Component {
 
   async componentDidMount() {
     const resp = await window.fetch(
-      `${window.location.origin}/quiz_mode/questions/random.json`
+      `${window.location.origin}/${window.location.pathname}.json`
     );
     const respJson = await resp.json();
     this.setState({
       question: {
         id: respJson.id,
         content: respJson.content
+          .split("\n")
+          .map(line => <p key={line}>{line}</p>)
       }
     });
   }

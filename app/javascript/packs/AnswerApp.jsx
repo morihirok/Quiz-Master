@@ -26,7 +26,9 @@ class AnswerApp extends React.Component {
   }
 
   async componentDidMount() {
-    const resp = await window.fetch(`${window.location.href}.json`);
+    const resp = await window.fetch(
+      `${window.location.origin}/quiz_mode/questions/random.json`
+    );
     const respJson = await resp.json();
     this.setState({
       question: {

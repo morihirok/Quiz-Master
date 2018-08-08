@@ -26,6 +26,7 @@ class AnswerApp extends React.Component {
   }
 
   async componentDidMount() {
+    // Set random question
     const resp = await window.fetch(
       `${window.location.origin}/${window.location.pathname}.json`
     );
@@ -47,6 +48,7 @@ class AnswerApp extends React.Component {
 
   handleOnChangeAnswer({ target }) {
     const { quizDone } = this.state;
+    // When input length is 0 or clicked show answer button, input button is disable
     if (target.value.length > 0 && !quizDone) {
       this.setState({ buttonDisable: false });
     } else {
@@ -56,6 +58,7 @@ class AnswerApp extends React.Component {
   }
 
   async handleOnClickSubmit() {
+    // Protect double click
     this.setState({ buttonDisable: true });
 
     const { answer, question } = this.state;
@@ -67,6 +70,7 @@ class AnswerApp extends React.Component {
     const { result } = await resp.json();
 
     if (!result) {
+      // If answer is wrong, user can retry
       this.setState({ buttonDisable: false });
     } else {
       this.setState({ quizDone: true });

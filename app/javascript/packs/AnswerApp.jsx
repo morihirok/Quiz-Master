@@ -29,6 +29,11 @@ class AnswerApp extends React.Component {
     const resp = await window.fetch(
       `${window.location.origin}/${window.location.pathname}.json`
     );
+
+    if (resp.status !== 200) {
+      return;
+    }
+
     const respJson = await resp.json();
     this.setState({
       question: {

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :questions
 
   namespace :quiz_mode do
-    resources :questions, only: [:index, :show] do
+    resources :questions, only: :show do
       resources :answer, only: :index
     end
   end

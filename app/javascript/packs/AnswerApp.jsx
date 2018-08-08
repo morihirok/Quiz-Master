@@ -17,7 +17,7 @@ class AnswerApp extends React.Component {
       result: null,
       buttonDisable: true,
       answerShowed: false,
-      correctAnswer: null,
+      correctAnswer: "",
       quizDone: false
     };
     this.handleOnChangeAnswer = this.handleOnChangeAnswer.bind(this);
@@ -99,15 +99,16 @@ class AnswerApp extends React.Component {
         <h2 className="mb-4">{question.content}</h2>
         <form>
           <div className="form-group">
-            <label htmlFor="answerInput">Answer</label>
+            <div>Answer</div>
             <input
               onChange={this.handleOnChangeAnswer}
               value={answer}
               id="answerInput"
               type="text"
-              className="form-control w-75"
+              className="form-control w-75 mt-2"
               disabled={answerShowed}
             />
+
             <button
               onClick={this.handleOnClickSubmit}
               className="btn btn-primary mt-3"

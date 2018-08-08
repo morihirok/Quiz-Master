@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const ShowAnswerButton = props => {
   const {
@@ -37,6 +38,13 @@ const ShowAnswerButton = props => {
       </button>
     </div>
   );
+};
+
+ShowAnswerButton.propTypes = {
+  answerShowed: PropTypes.bool.isRequired,
+  quizDone: PropTypes.bool.isRequired,
+  correctAnswer: PropTypes.string.isRequired,
+  handleOnClickShowAnswer: PropTypes.func.isRequired
 };
 
 export default ShowAnswerButton;

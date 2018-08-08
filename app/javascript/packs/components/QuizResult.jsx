@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const QuizResult = ({ result }) => {
   if (result === null) return <div />;
@@ -22,5 +23,10 @@ const QuizResult = ({ result }) => {
     </div>
   );
 };
+
+QuizResult.propTypes = {
+  result: PropTypes.oneOfType([PropTypes.bool])
+};
+QuizResult.defaultProps = { result: null };
 
 export default QuizResult;
